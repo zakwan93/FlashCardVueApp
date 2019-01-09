@@ -13,14 +13,15 @@
 
     <h1>Flashcard App!</h1>
 
+    <!-- Used v-model to add data dynamically in card from input type -->
     <div class="flashcard-form">
       <label for="front">Front
-        <input type="text" id="front">
+        <input v-model="newFront" type="text" id="front">
       </label>
       <label for="back">Back
-        <input type="text" id="back">
+        <input v-on:keypress.enter="addNew" v-model="newBack" type="text" id="back">
       </label>
-      <button>Add a New Card</button>
+      <button v-on:click = "addNew">Add a New Card</button>
       <span class="error">Oops! Flashcards need a front and a back.</span>
     </div>
 
