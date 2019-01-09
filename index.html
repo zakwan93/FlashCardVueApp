@@ -22,7 +22,7 @@
         <input v-on:keypress.enter="addNew" v-model="newBack" type="text" id="back">
       </label>
       <button v-on:click = "addNew">Add a New Card</button>
-      <span class="error">Oops! Flashcards need a front and a back.</span>
+      <span v-show="error" class="error">Oops! Flashcards need a front and a back.</span>
     </div>
 
     <ul class="flashcard-list">
@@ -39,13 +39,15 @@
       <!-- Used v-if else to achive same because we are rendering differennt template  -->
       <!-- Added v-on:click to toggele card front and back and created toggleCard method in app.js -->
       <li v-for="card in cards"
-          v-on:click="toggleCard(card)">
-        <p v-if="!card.flipped" class="card">{{card.front}}
-            <span class="delete-card">X</span>
-        </p>
-        <p v-else="card.flipped" class="card">{{card.back}}
-            <span class="delete-card">X</span>
-        </p>
+          v-on:click="toggleCard(card,index)">
+        <transition name = "flip">
+          <p v-if="!card.flipped" key="front" class="card">{{card.front}}
+              <span v-on:click="cards.splice(index, 1)" class="delete-card">X</span>
+          </p>
+          <p v-else="card.flipped" key="back" class="card">{{card.back}}
+              <span v-on:click="cards.splice(index, 1)" class="delete-card">X</span>
+          </p>
+        </transition>
       </li>
     </ul>
   </div>
