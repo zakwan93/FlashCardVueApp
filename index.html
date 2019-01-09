@@ -25,11 +25,24 @@
     </div>
 
     <ul class="flashcard-list">
-      <li>
-        <p class="card">
+      <!-- Used v-show to flip card front and back -->
+      <!-- <li v-for="card in cards">
+        <p v-show="!card.flipped" class="card">{{card.front}}
             <span class="delete-card">X</span>
         </p>
-        <p class="card">
+        <p v-show="card.flipped" class="card">{{card.back}}
+            <span class="delete-card">X</span>
+        </p>
+      </li> -->
+
+      <!-- Used v-if else to achive same because we are rendering differennt template  -->
+      <!-- Added v-on:click to toggele card front and back and created toggleCard method in app.js -->
+      <li v-for="card in cards"
+          v-on:click="toggleCard(card)">
+        <p v-if="!card.flipped" class="card">{{card.front}}
+            <span class="delete-card">X</span>
+        </p>
+        <p v-else="card.flipped" class="card">{{card.back}}
             <span class="delete-card">X</span>
         </p>
       </li>
